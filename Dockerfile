@@ -1,7 +1,7 @@
 FROM golang:1.19.1-alpine
 
 RUN apk update && apk add git
-
+RUN apk add curl
 
 RUN go install -v golang.org/x/tools/gopls@latest \
 	&& go install -v github.com/ramya-rao-a/go-outline@latest \
