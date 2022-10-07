@@ -59,6 +59,9 @@
 		"explorer.confirmDragAndDrop": false,
 		"go.editorContextMenuCommands": {},
 		"go.languageServerExperimentalFeatures": {},
+		"go.gopath": "/go",
+		"go.inferGopath": true,
+		"go.useLanguageServer": true,
 		"workbench.editor.enablePreview": true,
 		"files.insertFinalNewline": true,
 		"css.fileExtensions": [
