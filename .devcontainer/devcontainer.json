@@ -14,7 +14,7 @@
 	"service": "go",
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/go/src/app"
+	"workspaceFolder": "/go/src/app",
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
@@ -25,4 +25,83 @@
 	// "postCreateCommand": "apt-get update && apt-get install -y curl",
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
+	"extensions": [
+		"golang.go",
+		"ms-azuretools.vscode-docker",
+	],
+	"settings": {
+		"editor.insertSpaces": false,
+		"editor.renderWhitespace": "all",
+		"editor.suggestSelection": "first",
+		"editor.tabSize": 2,
+		"files.associations": {
+			"*.html": "html"
+		},
+		"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+		"workbench.iconTheme": "material-icon-theme",
+		"vim.insertModeKeyBindings": [
+			{
+				"before": [
+					"j",
+					"j"
+				],
+				"after": [
+					"<Esc>"
+				]
+			}
+		],
+		"[javascript]": {
+			"editor.defaultFormatter": "vscode.typescript-language-features"
+		},
+		"[html]": {
+			"editor.defaultFormatter": "vscode.html-language-features"
+		},
+		"explorer.confirmDragAndDrop": false,
+		"go.editorContextMenuCommands": {},
+		"go.languageServerExperimentalFeatures": {},
+		"workbench.editor.enablePreview": true,
+		"files.insertFinalNewline": true,
+		"css.fileExtensions": [
+			"css",
+			"scss"
+		],
+		"vim.commandLineModeKeyBindingsNonRecursive": [],
+		"python.languageServer": "Default",
+		"files.watcherExclude": {
+			"**/.bloop": true,
+			"**/.metals": true,
+			"**/.ammonite": true
+		},
+		"sync.gist": "a0e06ae5b69a486a27fdb1078aabfe3b",
+		"workbench.startupEditor": "newUntitledFile",
+		"gopls": {},
+		"editor.formatOnSave": true,
+		"go.formatTool": "goimports",
+		"security.workspace.trust.untrustedFiles": "open",
+		"git.confirmSync": false,
+		"files.exclude": {
+			"**/.classpath": true,
+			"**/.project": true,
+			"**/.settings": true,
+			"**/.factorypath": true,
+			"**/.gitignore": false,
+			"**/.github": false,
+		},
+		"redhat.telemetry.enabled": true,
+		"bracket-pair-colorizer-2.depreciation-notice": false,
+		"window.zoomLevel": 3,
+		"[python]": {
+			"editor.tabSize": 2,
+			"editor.insertSpaces": true
+		},
+		"terminal.integrated.inheritEnv": false,
+		"[go]": {
+			"editor.insertSpaces": false,
+			"editor.formatOnSave": true,
+			"editor.codeActionsOnSave": {
+				"source.organizeImports": true
+			},
+			"editor.suggest.snippetsPreventQuickSuggestions": false
+		}
+	},
 }
