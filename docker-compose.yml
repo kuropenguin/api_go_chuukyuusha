@@ -7,6 +7,8 @@ services:
       - ./:/go/src/app
     working_dir: /go/src/app
     tty: true
+    networks:
+      - app-net
 
   mysql:
     image: mysql:5.7
@@ -27,6 +29,13 @@ services:
       - "3306:3306"
     volumes:
       - db-volume:/var/lib/mysql
+    networks:
+      - app-net
 
 volumes:
   db-volume:
+
+
+networks:
+  app-net:
+    driver: bridge
