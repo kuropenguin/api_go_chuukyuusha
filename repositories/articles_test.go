@@ -1,8 +1,6 @@
 package repositories_test
 
 import (
-	"database/sql"
-	"fmt"
 	"testing"
 
 	"github.com/kuropenguin/api_go_chuukyuusha/models"
@@ -12,17 +10,6 @@ import (
 )
 
 func TestSelectArticleDetail(t *testing.T) {
-	dbUser := "docker"
-	dbPassword := "docker"
-	dbDatabase := "sampledb"
-	dbConn := fmt.Sprintf("%s:%s@tcp(db-for-go)/%s?parseTime=true", dbUser, dbPassword, dbDatabase)
-
-	db, err := sql.Open("mysql", dbConn)
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer db.Close()
-
 	tests := []struct {
 		testTitle string
 		expected  models.Article
@@ -31,17 +18,17 @@ func TestSelectArticleDetail(t *testing.T) {
 			testTitle: "subtest1",
 			expected: models.Article{
 				ID:       1,
-				Title:    "firstPost",
-				Contents: "this is my first blog",
+				Title:    "first",
+				Contents: "first_c",
 				UserName: "saki",
 				NiceNum:  2,
 			},
 		}, {
 			testTitle: "subtest2",
 			expected: models.Article{
-				ID:       1,
-				Title:    "firstPost",
-				Contents: "this is my first blog",
+				ID:       2,
+				Title:    "second",
+				Contents: "second_c",
 				UserName: "saki",
 				NiceNum:  2,
 			},
@@ -50,7 +37,7 @@ func TestSelectArticleDetail(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.testTitle, func(t *testing.T) {
-			got, err := repositories.SelectArticleDetail(db, test.expected.ID)
+			got, err := repositories.SelectArticleDetail(testDB, test.expected.ID)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -76,19 +63,10 @@ func TestSelectArticleDetail(t *testing.T) {
 
 // SelectArticleList関数のテスト
 func TestSelectArticleList(t *testing.T) {
-	// テストで使うデータベースに接続
-	dbUser := "docker"
-	dbPassword := "docker"
-	dbDatabase := "sampledb"
-	dbConn := fmt.Sprintf("%s:%s@tcp(db-for-go)/%s?parseTime=true", dbUser, dbPassword, dbDatabase)
-	db, err := sql.Open("mysql", dbConn)
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer db.Close()
+
 	// テスト対象の関数を実行
 	expectedNum := 2
-	got, err := repositories.SelectArticleList(db, 1)
+	got, err := repositories.SelectArticleList(testDB, 1)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -96,4 +74,28 @@ func TestSelectArticleList(t *testing.T) {
 	if num := len(got); num != expectedNum {
 		t.Errorf("want %d but got %d articles\n", expectedNum, num)
 	}
+}
+
+func TestInsertArticle(t *testing.T) {
+	article := models.Article{
+		Title:    "insertTest",
+		Contents: "testest",
+		UserName: "saki",
+	}
+
+	expectedArticleNum := 3
+	newArticle, err := repositories.InsertArticle(testDB, article)
+	if err != nil {
+		t.Error(err)
+	}
+	if newArticle.ID != expectedArticleNum {
+		t.Errorf("new article id is expected %d but got %d\n", expectedArticleNum, newArticle.ID)
+	}
+
+	t.Cleanup(func() {
+		const sqlStr = `
+		delete from articles
+		where title = ? and contents = ? and username = ?`
+		testDB.Exec(sqlStr, article.Title, article.Contents, article.UserName)
+	})
 }
