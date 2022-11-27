@@ -18,8 +18,8 @@ func TestSelectArticleDetail(t *testing.T) {
 			testTitle: "subtest1",
 			expected: models.Article{
 				ID:       1,
-				Title:    "first",
-				Contents: "first_c",
+				Title:    "firstPost",
+				Contents: "This is my first blog",
 				UserName: "saki",
 				NiceNum:  2,
 			},
@@ -27,10 +27,10 @@ func TestSelectArticleDetail(t *testing.T) {
 			testTitle: "subtest2",
 			expected: models.Article{
 				ID:       2,
-				Title:    "second",
-				Contents: "second_c",
+				Title:    "2nd",
+				Contents: "Second blog post",
 				UserName: "saki",
-				NiceNum:  2,
+				NiceNum:  4,
 			},
 		},
 	}
