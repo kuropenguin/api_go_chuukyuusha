@@ -5,6 +5,9 @@ RUN apk add curl
 #よくビルドに必要なるものをまとめたパック（alpineは軽量化のために色々省いているので、そのままだとgo testが動かない）
 RUN apk add build-base
 
+#mysql install （これしないと mysqlコマンドが go app側から使えない）
+RUN apk add mysql-client
+
 RUN go install -v golang.org/x/tools/gopls@latest \
 	&& go install -v github.com/ramya-rao-a/go-outline@latest \
 	&& go install -v golang.org/x/tools/cmd/goimports@latest \
